@@ -39,7 +39,7 @@ const Grid = ({ playerShipName, playerShip }: PropsType) => {
       } else {
         null
       }
-    } while(margArr.length < 320)
+    } while(margArr.length < 275)
     const sortedMargArr: number[] = margArr.sort((a, b) => {return a - b})
     const toStringArr: MarginsType = sortedMargArr.toString().split(",").map(element => element + "px")
     return toStringArr
@@ -50,7 +50,7 @@ const Grid = ({ playerShipName, playerShip }: PropsType) => {
     do {
       const randomIndex = Math.floor(Math.random() * arr.length)
       margArr.push(arr[randomIndex])
-    } while(margArr.length < 320)
+    } while(margArr.length < 275)
     return margArr
   }
 
@@ -69,7 +69,7 @@ const Grid = ({ playerShipName, playerShip }: PropsType) => {
     do {
       const randomIndex = Math.floor(Math.random() * 4)
       catArr.push(possibleCats[randomIndex])
-    } while(catArr.length < 320)
+    } while(catArr.length < 275)
     const row2 = document.getElementById("row-2") as HTMLDivElement
     row2.innerHTML = `<div>` + catArr.map(function(cat) {
       return `<img src="` + cat.img + `" alt="` + cat.id + `" key={setOriginalKey()} class="cat-images"></img>`}
@@ -79,7 +79,7 @@ const Grid = ({ playerShipName, playerShip }: PropsType) => {
      (catArrElements[index] as HTMLImageElement).style.marginTop = vArr[index];
      (catArrElements[index] as HTMLImageElement).style.marginLeft = hArr[index];
      index += 1
-    } while(index < 320)
+    } while(index < 275)
   }
 
   function setShip(arr: HTMLCollectionOf<Element>, arr2: string[]): void {
@@ -91,12 +91,12 @@ const Grid = ({ playerShipName, playerShip }: PropsType) => {
 
   function moveShipHorizontally(): void {
     (document.getElementById("grid") as HTMLDivElement).style.animationName = "horizontalGridMove";
-    (document.getElementById("grid") as HTMLDivElement).style.animationDuration = "100s";
+    (document.getElementById("grid") as HTMLDivElement).style.animationDuration = "95s";
     (document.getElementById("grid") as HTMLDivElement).style.animationTimingFunction = "linear";
     (document.getElementById("grid") as HTMLDivElement).style.animationDelay = "1s";
     for (let i = 0; i < playerShipImageArr.length; i++) {
       (playerShipImageArr[i] as HTMLImageElement).style.animationName = "horizontalShipMove";
-      (playerShipImageArr[i] as HTMLImageElement).style.animationDuration = "100s";     
+      (playerShipImageArr[i] as HTMLImageElement).style.animationDuration = "95s";     
       (playerShipImageArr[i] as HTMLImageElement).style.animationTimingFunction = "linear"; 
       (playerShipImageArr[i] as HTMLImageElement).style.animationDelay = "1s"; 
     }
@@ -131,10 +131,10 @@ const Grid = ({ playerShipName, playerShip }: PropsType) => {
     return randomMarg.toString() + "px"
   }
 
-  function generateRandomizedSaying(value: string): string {
-    const loseArr = ['that was a lot of cats', 'the moon sure is far away', 'the stars devour us all in time', 'meowch', "well would you look at that, spud's spinning through space again", 'gravity shmavity', 'where do we go from here capn spud?']
-    const winArr = ['it is made of cheese!', 'lets hope my 300 cat clones are okay!', 'MOOOOOOOON', 'how did all those cat clones get out here in the first place', 'martians are real and they are funny lil guys', 'mars next?']
-    if (value = "loss") {
+  function generateRandomizedSaying(val: string): string {
+    const loseArr: string[] = ['that was a lot of cats', 'the moon sure is far away', 'the stars devour us all in time', 'meowch', "well would you look at that, spud's spinning through space again", 'gravity shmavity', 'where do we go from here capn spud?']
+    const winArr: string[] = ['it is made of cheese!', 'lets hope my 300 cat clones are okay!', 'MOOOOOOOON', 'how did all those cat clones get out here in the first place', 'martians are real and they are funny lil guys', 'mars next?']
+    if (val === "loss") {
       return loseArr[Math.floor(Math.random()*loseArr.length)]
     } else {
       return winArr[Math.floor(Math.random()*loseArr.length)]
@@ -146,7 +146,7 @@ const Grid = ({ playerShipName, playerShip }: PropsType) => {
     const moonLeftBorder = document.getElementById("moon")?.getBoundingClientRect().left as number
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].getBoundingClientRect().top === shipPositionTop) {
-        if (arr[i].getBoundingClientRect().left < (shipRightBorder - 5) && arr[i].getBoundingClientRect().right > (shipLeftBorder + 20)) {
+        if (arr[i].getBoundingClientRect().left < (shipRightBorder - 8) && arr[i].getBoundingClientRect().right > (shipLeftBorder + 26)) {
           clearInterval(collisionCheck)
           clearInterval(populateInterval)
           const explosion1 = document.createElement('img')
@@ -260,6 +260,8 @@ const Grid = ({ playerShipName, playerShip }: PropsType) => {
         }
       })
     },[])
+
+    console.log(window.innerHeight, window.innerWidth) // 750, 1200
 
     return(
         <div id="gameplay">
