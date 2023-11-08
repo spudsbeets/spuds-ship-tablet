@@ -60,7 +60,12 @@ html {
 }
 
 .row {
-    border-bottom: 5px solid black;
+    border-image: linear-gradient(30deg, #787878, #d4af37, #e9967a, #ffb6c1) 27;
+    border-width: 5px;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
     margin-bottom: 90px;
     z-index: -1;
 }
